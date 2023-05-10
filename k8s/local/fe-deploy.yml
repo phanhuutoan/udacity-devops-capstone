@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-fe
+  labels:
+    component: fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: todo-fe
+  template:
+    metadata:
+      labels:
+        pod: todo-fe
+    spec:
+      containers:
+      - name: todo-fe
+        image: superknife0512/todo-fe
+        ports:
+        - containerPort: 80

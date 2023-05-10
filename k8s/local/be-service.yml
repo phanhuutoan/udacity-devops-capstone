@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: be-service
+spec:
+  selector:
+    component: be
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-be
+  labels:
+    component: be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: todo-be
+  template:
+    metadata:
+      labels:
+        pod: todo-be
+    spec:
+      containers:
+      - name: todo-be
+        image: superknife0512/todo-be
+        ports:
+        - containerPort: 5000

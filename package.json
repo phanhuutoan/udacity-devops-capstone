@@ -6,7 +6,13 @@
   "private": true,
   "scripts": {
     "start-be": "yarn workspace @capstone/todo-be start:dev",
-    "start-fe": "yarn workspace @capstone/todo-fe start"
+    "start-fe": "yarn workspace @capstone/todo-fe start",
+    "test-be": "yarn workspace @capstone/todo-be test",
+    "test-fe": "yarn workspace @capstone/todo-fe test",
+    "build-be": "yarn workspace @capstone/todo-be build",
+    "build-fe": "yarn workspace @capstone/todo-fe build",
+    "start-prod-be": "yarn workspace @capstone/todo-be start:prod",
+    "docker:build": "./scripts/build-images.sh"
   },
   "repository": {
     "type": "git",
@@ -21,5 +27,5 @@
     "apps/*"
   ],
   "homepage": "https://github.com/phanhuutoan/udacity-devops-capstone#readme",
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "yarn@1.22.19"
 }
