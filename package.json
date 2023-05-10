@@ -1,0 +1,25 @@
+{
+  "name": "udacity-devops-capstone",
+  "version": "1.0.0",
+  "description": "Devops capstone",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start-be": "yarn workspace @capstone/todo-be start:dev",
+    "start-fe": "yarn workspace @capstone/todo-fe start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://phanhuutoan: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@github.com/phanhuutoan/udacity-devops-capstone.git"
+  },
+  "author": "Tony",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phanhuutoan/udacity-devops-capstone/issues"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "homepage": "https://github.com/phanhuutoan/udacity-devops-capstone#readme",
+  "packageManager": "yarn@3.5.0"
+}
