@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    component: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: database
+  template:
+    metadata:
+      labels:
+        pod: database
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15.2-alpine
+        imagePullPolicy: Always  
+        env: 
+        - name: POSTGRES_PASSWORD
+          value: Toan1234
+        - name: POSTGRES_DB
+          value: test
+        ports:
+        - containerPort: 5432

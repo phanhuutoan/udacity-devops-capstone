@@ -17,5 +17,6 @@ spec:
       containers:
       - name: todo-fe
         image: superknife0512/todo-fe
+        imagePullPolicy: Always  
         ports:
         - containerPort: 80

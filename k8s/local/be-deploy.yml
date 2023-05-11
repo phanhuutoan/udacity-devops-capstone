@@ -17,5 +17,17 @@ spec:
       containers:
       - name: todo-be
         image: superknife0512/todo-be
+        imagePullPolicy: Always
+        env:
+        - name: DB_HOST
+          value: db-service
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: test
+        - name: DB_USERNAME
+          value: postgres
+        - name: DB_PASSWORD
+          value: Toan1234
         ports:
         - containerPort: 5000

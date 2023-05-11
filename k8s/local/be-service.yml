@@ -4,7 +4,7 @@ metadata:
   name: be-service
 spec:
   selector:
-    component: be
+    pod: todo-be
   ports:
     - protocol: TCP
       port: 5000
