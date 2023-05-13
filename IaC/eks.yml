@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: EKS cluster
+
+Parameters:
+  ClusterName:
+    Description: EKS cluster name
+    Type: String
+
+Resources: 
+  EKSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: ESK-security-group
+      GroupDescription: for ESK cluster
+      VpcId: !ImportValue VPCId
+      SecurityGroupIngress:
+        - IpProtocol: '-1'
+          FromPort: 0
+          ToPort: 60000
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          FromPort: 0
+          ToPort: 60000
+          CidrIp: 0.0.0.0/0
+          
+  EKSClusterRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - eks.amazonaws.com
+                - rds.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+  EKSNodeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - eks.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy 
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly  
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+          
+
+  EKSCluster:
+    Type: AWS::EKS::Cluster
+    Properties:     
+      Name: !Ref ClusterName
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+          - !Ref EKSSecurityGroup
+        SubnetIds:
+          - !ImportValue PublicSubnet1
+          - !ImportValue PublicSubnet2
+      RoleArn: !GetAtt [EKSClusterRole, Arn]
+      
+  NodeGroup: 
+    Type: 'AWS::EKS::Nodegroup'
+    Properties:
+      ClusterName: !Ref ClusterName
+      NodeRole: !GetAtt [EKSNodeRole, Arn]
+      ScalingConfig:
+        MinSize: 2
+        DesiredSize: 2
+        MaxSize: 2
+      Labels:
+        node: !Sub EKS-NODE-${ClusterName}
+      InstanceTypes: 
+        - t2.small
+      Subnets:
+        - !ImportValue PublicSubnet1
+        - !ImportValue PublicSubnet2
+      RemoteAccess:
+        Ec2SshKey: eks-key
+    DependsOn: EKSCluster

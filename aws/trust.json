@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::825938401769:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/43B7AC4F2B34A35BA7B49FBACCB605DB"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/43B7AC4F2B34A35BA7B49FBACCB605DB:sub": "system:serviceaccount:ack-system:ack-s3-controller"
+        }
+      }
+    }
+  ]
+}

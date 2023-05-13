@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: be-service
+spec:
+  type: NodePort
+  selector:
+    pod: todo-be
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-be
+  labels:
+    component: be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: todo-be
+  template:
+    metadata:
+      labels:
+        pod: todo-be
+    spec:
+      containers:
+      - name: todo-be
+        image: superknife0512/todo-be
+        imagePullPolicy: Always
+        env: 
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: rds-configmap
+              key: default.db-for-cluster-host
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: rds-configmap
+              key: default.db-for-cluster-port
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: rds-configmap
+              key: default.db-for-cluster-user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credential
+              key: DB_PASSWORD
+
+        ports:
+        - containerPort: 5000

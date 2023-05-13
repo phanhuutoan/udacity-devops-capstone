@@ -1,0 +1,19 @@
+apiVersion: rds.services.k8s.aws/v1alpha1
+kind: DBInstance
+metadata:
+  name: todo-db
+spec:
+  allocatedStorage: 20
+  dbInstanceClass: db.t3.micro
+  dbInstanceIdentifier: todo-db
+  engine: postgres
+  engineVersion: "14"
+  masterUsername: "postgres"
+  masterUserPassword:
+    namespace: default
+    name: database-credential
+    key: DB_PASSWORD
+  dbName: todo-db
+  dbSubnetGroupName: uda-capstone-rdssubnetgroup-hupsfmgh8asq
+  vpcSecurityGroupIDs:
+    - sg-03725899b294f20e5
