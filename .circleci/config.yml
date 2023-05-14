@@ -1,0 +1,103 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.1.0
+
+jobs:
+  lint-check: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - save_cache:
+          key: node-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+            - apps/todo-be/node_modules
+            - apps/todo-fe/node_modules
+      - run: 
+          name: lint
+          command: yarn lint
+  audit: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - restore_cache:
+          keys: 
+            - node-cache-{{ checksum "yarn.lock" }}
+            - node-cache-
+      - run: 
+          name: run audit
+          command: yarn run improved-yarn-audit --min-severity critical
+  build-fe:
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - restore_cache:
+          keys: 
+            - node-cache-{{ checksum "yarn.lock" }}
+            - node-cache-
+      - run: 
+          name: build frontend
+          command: yarn build-fe 
+  build-be:
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - restore_cache:
+          keys: 
+            - node-cache-{{ checksum "yarn.lock" }}
+            - node-cache-
+      - run: 
+          name: build backend
+          command: yarn build-be 
+  fe-unit-test:
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - restore_cache:
+          keys: 
+            - node-cache-{{ checksum "yarn.lock" }}
+            - node-cache-
+      - run: 
+          name: UT frontend
+          command: yarn test-fe 
+      - store_test_results:
+          path: apps/todo-fe/coverage
+  be-unit-test:
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - restore_cache:
+          keys: 
+            - node-cache-{{ checksum "yarn.lock" }}
+            - node-cache-
+      - run: 
+          name: UT backend
+          command: yarn test-be
+      - store_test_results:
+          path: apps/todo-be/coverage
+          
+
+workflows:
+  build_and_test:
+    jobs:
+      - lint-check
+      - audit:
+          requires: 
+          - lint-check
+
+      - build-fe:
+          requires: 
+          - audit
+      - build-be:
+          requires: 
+          - audit
+      - fe-unit-test:
+          requires: 
+          - audit
+      - be-unit-test:
+          requires: 
+          - audit
+
+      

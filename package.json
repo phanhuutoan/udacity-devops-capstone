@@ -7,17 +7,15 @@
   "scripts": {
     "start-be": "yarn workspace @capstone/todo-be start:dev",
     "start-fe": "yarn workspace @capstone/todo-fe start",
-    "test-be": "yarn workspace @capstone/todo-be test",
+    "test-be": "yarn workspace @capstone/todo-be test --coverage",
     "test-fe": "yarn workspace @capstone/todo-fe test",
     "build-be": "yarn workspace @capstone/todo-be build",
     "build-fe": "yarn workspace @capstone/todo-fe build",
     "start-prod-be": "yarn workspace @capstone/todo-be start:prod",
-    "docker:build": "./scripts/build-images.sh"
+    "docker:build": "./scripts/build-images.sh",
+    "lint": "eslint apps/**/*.ts apps/**/*.tsx"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://phanhuutoan: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@github.com/phanhuutoan/udacity-devops-capstone.git"
-  },
+  "repository": "git+https://phanhuutoan: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@github.com/phanhuutoan/udacity-devops-capstone.git",
   "author": "Tony",
   "license": "ISC",
   "bugs": {
@@ -27,5 +25,9 @@
     "apps/*"
   ],
   "homepage": "https://github.com/phanhuutoan/udacity-devops-capstone#readme",
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "devDependencies": {
+    "improved-yarn-audit": "^3.0.0",
+    "yarn-audit-fix": "^9.3.10"
+  }
 }

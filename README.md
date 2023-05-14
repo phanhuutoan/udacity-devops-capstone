@@ -65,6 +65,7 @@ IaC/script/deploy-eks.sh update false
 # Create secret using kubectl name DB_PASSWORD
 kubectl create secret generic database-credential --from-literal DB_PASSWORD=abc
 ```
+ => You need to update your kubeconfig file using this instruction in order to connect EKS cluster: `aws eks update-kubeconfig --region region-code --name my-cluster`
  2. Install rds using this instruction: https://aws-controllers-k8s.github.io/community/docs/tutorials/rds-example/ (Sometimes **ACK** is not stable so instead of using ACK you still can create it manually and push DB credential to Configmap named **rds-configmap**)
  
  3. By this way, we are able to create RDS via k8s cluster (EKS). 
@@ -74,5 +75,5 @@ kubectl create secret generic database-credential --from-literal DB_PASSWORD=abc
  7. Deploy ingress controller using `kubectl apply -f ingress.yml`
  8. You will reveive a load-balancer link: 
  <img src="images/project-img/load-balancer-ingress.png" />
- in my case: a0d120f18bc6b4653b9f5013cf30053e-6c146ae369ac8bdc.elb.us-east-1.amazonaws.com.
- 9. I bought a cheap domain named **schoolx.host** and add an CNAME to it so from now we can use schoolx.host to refer to LB domain above. To see how the website look like: <a href="project-brochure.md">Project brochure</a> [Project images](project-brochure.md)
+ in my case: [a0d120f18bc6b4653b9f5013cf30053e-6c146ae369ac8bdc.elb.us-east-1.amazonaws.com]
+ 9. I bought a cheap domain named **schoolx.host** and add an CNAME to it so from now we can use schoolx.host to refer to LB domain above. To see how the website look like: <a href="project-brochure.md">Project brochure</a>
