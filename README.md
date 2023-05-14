@@ -7,6 +7,13 @@ Using AWS, K8S (EKS), cloudformation and circleCI to build it.
     1. [AWS architecture](#11-aws-architecture)
     2. [K8S cluster](#12-k8s-cluster)
     3. [AWS CICD solution](#13-cicd-process)
+2. [Presetup](#2-pre-setup)
+    1. [Setup AWS network](#21-prepare-network-infra-by-running)
+    2. [Setup EKS Cluster](#22-prepare-eks-cluster-aws-cluster-by-running)
+    3. [Running k8s cluster locally](#23-running-the-project-locally)
+    4. [Deploy our cluster to EKS](#24-deploy-to-eks)
+3. [Project brochure](#3-project-brochure)
+
 
 ## 1. Proposal
 #### 1.1 AWS architecture
@@ -56,7 +63,7 @@ IaC/script/deploy-eks.sh update false
  2. Running everything up using: `kubectl apply -f k8s/local`
  3. Change your /etc/host file to point local-capstone.com to 127.0.0.1
  4. After running the project success fully you can run kubectl get pods to check 
- if there are 2 deployemnts todo-be and todo-fe
+ if there are 2 deployments todo-be and todo-fe, you also need to update env file of todo-fe for proper domain (local-capstone.com) or whatever you setup.
  5. Go to local-capstone.com and enjoy the result
 
 #### 2.4 Deploy to EKS
@@ -66,7 +73,7 @@ IaC/script/deploy-eks.sh update false
 kubectl create secret generic database-credential --from-literal DB_PASSWORD=abc
 ```
  => You need to update your kubeconfig file using this instruction in order to connect EKS cluster: `aws eks update-kubeconfig --region region-code --name my-cluster`
- 2. Install rds using this instruction: https://aws-controllers-k8s.github.io/community/docs/tutorials/rds-example/ (Sometimes **ACK** is not stable so instead of using ACK you still can create it manually and push DB credential to Configmap named **rds-configmap**)
+ 2. Install rds using this instruction: https://aws-controllers-k8s.github.io/community/docs/tutorials/rds-example/ (Sometimes **ACK** is not stable so instead of using ACK you still can create RDS manually and push DB credential to Configmap named **rds-configmap**)
  
  3. By this way, we are able to create RDS via k8s cluster (EKS). 
  4. Go to your cloudformation output to check and change the value insde file `k8s/prod/db-instance.yml`
@@ -76,4 +83,6 @@ kubectl create secret generic database-credential --from-literal DB_PASSWORD=abc
  8. You will reveive a load-balancer link: 
  <img src="images/project-img/load-balancer-ingress.png" />
  in my case: [a0d120f18bc6b4653b9f5013cf30053e-6c146ae369ac8bdc.elb.us-east-1.amazonaws.com]
- 9. I bought a cheap domain named **schoolx.host** and add an CNAME to it so from now we can use schoolx.host to refer to LB domain above. To see how the website look like: <a href="project-brochure.md">Project brochure</a>
+ 9. I bought a cheap domain named **schoolx.host** and add an CNAME to it so from now we can use schoolx.host to refer to LB domain above. To see how the website look like: 
+ ## 3. Project brochure
+ <a href="project-brochure.md">Project brochure</a>
