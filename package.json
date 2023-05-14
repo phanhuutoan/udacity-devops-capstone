@@ -13,7 +13,9 @@
     "build-fe": "yarn workspace @capstone/todo-fe build",
     "start-prod-be": "yarn workspace @capstone/todo-be start:prod",
     "docker:build": "./scripts/build-images.sh",
-    "lint": "eslint apps/**/*.ts apps/**/*.tsx"
+    "lint": "eslint apps/**/*.ts apps/**/*.tsx",
+    "migration:gen": "yarn workspace @capstone/todo-be migration:gen",
+    "migration:up": "yarn workspace @capstone/todo-be migration:up"
   },
   "repository": "git+https://phanhuutoan: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@github.com/phanhuutoan/udacity-devops-capstone.git",
   "author": "Tony",

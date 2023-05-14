@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration
+spec:
+  completions: 1
+  ttlSecondsAfterFinished: 200
+  backoffLimit: 1
+  template:
+    spec:
+      containers:
+      - name: todo-be
+        image: superknife0512/todo-be:latest
+        command: ["bash", "./scripts/migration.sh"]
+        env: 
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: rds-configmap
+              key: default.db-for-cluster-host
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: rds-configmap
+              key: default.db-for-cluster-port
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: rds-configmap
+              key: default.db-for-cluster-user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credential
+              key: DB_PASSWORD
+      restartPolicy: Never
