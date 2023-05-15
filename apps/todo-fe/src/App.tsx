@@ -48,7 +48,7 @@ function App() {
     <>
       <Center pt="2rem" flexDir={'column'}>
         <Text color={'gray.700'} fontSize={'45'} fontWeight={'600'} as="h1">
-          Udacity final project
+          Udacity final project V2
         </Text>
 
         <Box sx={styles.mainBox}>

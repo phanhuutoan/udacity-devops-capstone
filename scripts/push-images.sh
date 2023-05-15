@@ -1,15 +1,15 @@
-TAG_FE=$1
-TAG_BE=$2
+TAG=$1
+FOR=$2
 
-if [[ ! $TAG_FE ]]
+
+if [[ ! $TAG ]]
 then
-    TAG_FE="latest"
+    TAG="latest"
 fi
 
-if [[ ! $TAG_BE ]]
-then
-    TAG_BE="latest"
+if [[ $FOR == 'be' ]]
+then 
+    docker push superknife0512/todo-be:$TAG_BE
+else 
+    docker push superknife0512/todo-fe:$TAG_FE
 fi
-
-docker push superknife0512/todo-fe:$TAG_FE
-docker push superknife0512/todo-be:$TAG_BE
