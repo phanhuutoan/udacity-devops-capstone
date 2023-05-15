@@ -47,6 +47,26 @@ b. Using dns from aws
  <img src="images/project-img/full-part2.png" />
  <img src="images/project-img/updatev3.png" />
 
+##### Docker Hub for image registry
+ <img src="images/project-img/DockerHub.png" />
+
+##### Cloudformation slack
+1. network stack 
+ <img src="images/project-img/network-stack.png" />
+2. Cluster stack
+ <img src="images/project-img/cluster-stack.png" />
+
+##### EC2 nodes 
+ <img src="images/project-img/ec2-nodes.png" />
+ After run `kubectl get nodes`
+
+``` 
+NAME                         STATUS   ROLES    AGE     VERSION
+ip-10-1-0-102.ec2.internal   Ready    <none>   4h30m   v1.26.2-eks-a59e1f0
+ip-10-1-2-229.ec2.internal   Ready    <none>   4h28m   v1.26.2-eks-a59e1f0
+```
+
+
  
 
 
