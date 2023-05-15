@@ -95,11 +95,8 @@ jobs:
   
 
   build-and-push-img-fe:
-    docker:
-      - image: docker:17.05.0-ce-git
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD  # context / project UI env-var reference
+    machine:
+      image: ubuntu-2204:2022.04.2 
     steps:
       - checkout
       - setup_remote_docker:
@@ -118,11 +115,8 @@ jobs:
             bash scripts/push-images.sh latest fe
             bash scripts/push-images.sh "${CIRCLE_SHA1:0:7}" fe
   build-and-push-img-be:
-    docker:
-      - image: docker:17.05.0-ce-git
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD  # context / project UI env-var reference
+    machine:
+      image: ubuntu-2204:2022.04.2 
     steps:
       - checkout
       - setup_remote_docker:
