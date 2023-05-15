@@ -42,6 +42,11 @@ b. Using dns from aws
 ##### It seems like our app update successfully
  <img src="images/project-img/Update-app-sucessfully.png" />
 
+##### Update app with full pipeline:
+ <img src="images/project-img/full-part1.png" />
+ <img src="images/project-img/full-part2.png" />
+ <img src="images/project-img/updatev3.png" />
+
  
 
 
