@@ -116,7 +116,7 @@ jobs:
           name: push docker images
           command: |
             scripts/push-images.sh latest fe
-            scripts/push-images.sh ${CIRCLE_SHA1:0:7} fe
+            scripts/push-images.sh "${CIRCLE_SHA1:0:7}" fe
   build-and-push-img-be:
     docker:
       - image: docker:17.05.0-ce-git
@@ -134,12 +134,12 @@ jobs:
           name: build docker BE image
           command: |
             scripts/build-images.sh be latest 
-            scripts/build-images.sh be ${CIRCLE_SHA1:0:7}
+            scripts/build-images.sh be "${CIRCLE_SHA1:0:7}"
       - run: 
           name: push docker images
           command: |
             scripts/push-images.sh latest be
-            scripts/push-images.sh ${CIRCLE_SHA1:0:7} be
+            scripts/push-images.sh "${CIRCLE_SHA1:0:7}" be
 
   run-migration-job:
     docker:

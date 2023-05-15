@@ -1,6 +1,7 @@
+#!/bin/bash
+
 TAG=$1
 FOR=$2
-
 
 if [[ ! $TAG ]]
 then
@@ -9,7 +10,7 @@ fi
 
 if [[ $FOR == 'be' ]]
 then 
-    docker push superknife0512/todo-be:$TAG_BE
+    docker push superknife0512/todo-be:$TAG
 else 
-    docker push superknife0512/todo-fe:$TAG_FE
+    docker push superknife0512/todo-fe:$TAG
 fi
