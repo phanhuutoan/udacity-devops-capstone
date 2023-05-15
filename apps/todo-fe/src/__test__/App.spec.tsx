@@ -8,7 +8,7 @@ describe('App', () => {
     it('should show Udacity final project', () => {
       render(<App />)
       
-      const element = screen.getByText('Udacity final project')
+      const element = screen.getByText('Udacity final project V3')
       expect(element).toBeDefined()
     })
 

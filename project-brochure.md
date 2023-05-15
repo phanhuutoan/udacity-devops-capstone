@@ -1,4 +1,4 @@
-### 1. After our app is online, here's the result: 
+## 1. After our app is online, here's the result, CI process
 a. Using domain: schoolx.host
  <img src="images/project-img/fe-1.png" />
 b. Using dns from aws
@@ -22,6 +22,28 @@ b. Using dns from aws
 
  ##### Pipeline success when fix UT
  <img src="images/project-img/CI-success.png" />
+
+ ## 2. CD process: 
+
+##### Docker build and push successfully
+ <img src="images/project-img/success-docker.png" />
+ <img src="images/project-img/fullCD-pipeline.png" />
+
+##### Migration via k8s cluster because I use private RDS DB
+ <img src="images/project-img/success-migration.png" />
+
+##### Deploy app failed and run revert
+ <img src="images/project-img/revert-run-rollout.png" />
+
+##### Deploy app successfully and passed smoke test
+ <img src="images/project-img/deploy-success.png" />
+ <img src="images/project-img/smoke-passed.png" />
+
+##### It seems like our app update successfully
+ <img src="images/project-img/Update-app-sucessfully.png" />
+
+ 
+
 
 
  

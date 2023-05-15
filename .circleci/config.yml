@@ -188,25 +188,35 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      # - lint-check
-      # - audit:
-      #     requires: 
-      #     - lint-check
+      - lint-check
+      - audit:
+          requires: 
+          - lint-check
 
-      # - build-fe:
-      #     requires: 
-      #     - audit
-      # - build-be:
-      #     requires: 
-      #     - audit
-      # - fe-unit-test:
-      #     requires: 
-      #     - audit
-      # - be-unit-test:
-      #     requires: 
-      #     - audit
-      - build-and-push-img-fe
-      - build-and-push-img-be
+      - build-fe:
+          requires: 
+          - audit
+      - build-be:
+          requires: 
+          - audit
+      - fe-unit-test:
+          requires: 
+          - audit
+      - be-unit-test:
+          requires: 
+          - audit
+      - hold:
+          type: approval
+          requires:
+            - fe-unit-test
+            - be-unit-test
+
+      - build-and-push-img-fe:
+          requires:
+            - hold
+      - build-and-push-img-be:
+          requires:
+            - hold
 
       - run-migration-job:
           requires:
