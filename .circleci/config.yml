@@ -95,8 +95,8 @@ jobs:
   
 
   build-and-push-img-fe:
-    machine:
-      image: ubuntu-2204:2022.04.2 
+    docker:
+      - image: cimg/base:2022.06
     steps:
       - checkout
       - setup_remote_docker:
@@ -115,8 +115,8 @@ jobs:
             bash scripts/push-images.sh latest fe
             bash scripts/push-images.sh "${CIRCLE_SHA1:0:7}" fe
   build-and-push-img-be:
-    machine:
-      image: ubuntu-2204:2022.04.2 
+    docker:
+      - image: cimg/base:2022.06
     steps:
       - checkout
       - setup_remote_docker:
