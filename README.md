@@ -84,7 +84,8 @@ kubectl create secret generic database-credential --from-literal DB_PASSWORD=abc
  <img src="images/project-img/load-balancer-ingress.png" />
  in my case: [a0d120f18bc6b4653b9f5013cf30053e-6c146ae369ac8bdc.elb.us-east-1.amazonaws.com]
  9. I bought a cheap domain named **schoolx.host** and add an CNAME to it so from now we can use schoolx.host to refer to LB domain above. To see how the website look like: 
- ## 3. Project brochure
- <a href="project-brochure.md">Project brochure</a>
+
+## 3. Project brochure
+- <a href="project-brochure.md">Project brochure</a>
 
  
